@@ -38,7 +38,7 @@ public class RobotMap {
 	
 	
 	//DIGITAL IO
-	final static public int LEFT_ENC_A = 0;
+	final static public int LEFT_ENC_A = 0;//blue is A, yellow is b, brown is ground, orange is 5v
 	final static public int LEFT_ENC_B = 1;
 	final static public int RIGHT_ENC_A = 2;
 	final static public int RIGHT_ENC_B = 3;

@@ -1,56 +1,44 @@
 package org.usfirst.frc.team78.robot.commands;
 
-import org.usfirst.frc.team78.robot.Robot;
+import org.usfirst.frc.team78.robot.OI;
 
+import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TurnAdditional extends Command {
-	double m_angle;
-	double startAngle;
-	double target;
-	double speed;
+public class RumbleTest extends Command {
+
+	float m_i;
 	
-    public TurnAdditional(double angle) {
+    public RumbleTest(float i) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.chassis);
-    	 m_angle = angle;
+    	m_i = i;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.chassis.resetSensorData();
-    	startAngle = Robot.chassis.getAngle();
-    	
+    	OI.tStick.setRumble(RumbleType.kLeftRumble, m_i);
+    	OI.tStick.setRumble(RumbleType.kRightRumble, m_i);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	speed = Robot.chassis.turnAngleAdditional((startAngle + m_angle)%360);
-    	
-    	Robot.chassis.setTurnSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.chassis.isAtTurnTarget(startAngle + m_angle);
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.chassis.stopAllDrive();
-    	Robot.chassis.timerStart = false;
-    	Robot.chassis.atTarget = false;
-    	Robot.chassis.timer.stop();
-    	Robot.chassis.timer.reset();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

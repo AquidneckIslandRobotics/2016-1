@@ -58,10 +58,11 @@ public class Chassis extends Subsystem {
 	
 	
 	//CONSTANTS
-	final double GYRO_P = (.017);
+	final double GYRO_P = .003;//(.017); REAL ROBOT
 	final double DISTANCE_P = 0.00035;
-	final double VISION_GOAL = -55;
-	final double VISION_P = .0027;
+	final double VISION_GOAL = -6;
+	final double VISION_P = .001;
+	final double PIXELS_TO_ANGLE = .1;
 
 	
 	//TIMER
@@ -70,6 +71,7 @@ public class Chassis extends Subsystem {
 	
 	//TEST SHIT
 	public boolean didTurnStart = false;
+	public double testAngle;
 
 	
 	
@@ -91,11 +93,14 @@ public class Chassis extends Subsystem {
     	double left = Robot.oi.getDriverLeftStick();
     	double right = Robot.oi.getDriverRightStick();
     	
-    	if (Robot.oi.driverStick.getRawButton(7)){
-    		setSpeed(left*0.6, right*0.6);
+    	if (Robot.oi.driverStick.getRawButton(8)){
+    		setSpeed(left*0.5, right*0.5);
+    	}
+    	else if (Robot.oi.driverStick.getRawButton(7)){
+    		setSpeed(left, right);
     	}
     	else{
-    	setSpeed(left*1, right*1);
+    	setSpeed(left*.78, right*.78);
     	}
     }
     
@@ -152,7 +157,7 @@ public class Chassis extends Subsystem {
     	if (driftError < -180){
     		driftError = driftError + 360;
     	}
-    	else if (driftError > 360){
+    	else if (driftError > 180){
     		driftError = driftError - 360;
     	}
     	
@@ -175,11 +180,11 @@ public class Chassis extends Subsystem {
     		speed = -.7;
     	}
     	
-    	if (speed < .25 && speed > 0){
-    		speed = .25;
+    	if (speed < .13 && speed > 0){//real robot is .25 everywhere
+    		speed = .13;
     	}
-    	if(speed > -.25 && speed < 0){ 
-    		speed = -.25;
+    	if(speed > -.13 && speed < 0){ 
+    		speed = -.13;
     	}
     	
     	return speed;
@@ -223,6 +228,13 @@ public class Chassis extends Subsystem {
     	return speed;
     }
     
+    public double getGyroVisionTarget(){
+    	double pixels = Robot.vision.getVisionX();
+    	testAngle = pixels*PIXELS_TO_ANGLE;
+    	double angle = testAngle;
+    	return angle;//when positive, need to turn right. same as set turn speed
+    }
+    
     
 //_________________________________________________________________________________________________________________________________________
 //LOGIC METHODS
@@ -236,11 +248,11 @@ public class Chassis extends Subsystem {
     	if (error < -180){
     		error = error + 360;
     	}
-    	else if (error > 360){
+    	else if (error > 180){
     		error = error - 360;
     	}
 
-    	if ((error < 3) && (error > -3)){
+    	if ((error < 5) && (error > -5)){
     		if(timerStart == false){
    				timerStart = true;
    				timer.start();
@@ -364,7 +376,7 @@ public class Chassis extends Subsystem {
     
     
     public double getAngle(){
-    	return ahrs.getAngle();//just look at all the different gets, figure out what is going on
+    	return ahrs.getAngle();
     }
     
     public double getPitch(){
@@ -375,7 +387,5 @@ public class Chassis extends Subsystem {
     	return ahrs.getRoll();//just look at all the different gets, figure out what is going on
     }
     
-    public double getRawGyro(){
-    	return ahrs.getRawGyroX();
-    }
+
 }

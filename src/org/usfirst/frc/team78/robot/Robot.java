@@ -163,6 +163,8 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putBoolean("Intake", Robot.intake.intakePnState);
     	SmartDashboard.putBoolean("Shooter", Robot.shooter.shooterPnState);
     	SmartDashboard.putBoolean("Pancake", Robot.shooter.pancakePnState);
+    	SmartDashboard.putBoolean("timer", Robot.chassis.timerStart);
+    	SmartDashboard.putNumber("Vision Gyro", Robot.chassis.testAngle);
 
     
         	

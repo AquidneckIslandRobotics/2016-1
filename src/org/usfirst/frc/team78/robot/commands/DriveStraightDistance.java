@@ -35,15 +35,10 @@ public class DriveStraightDistance extends Command {
     	leftSpeed = Robot.chassis.driveStraightDistance(m_distance_clicks);
     	rightSpeed = leftSpeed;
     	
-    	//DIRECTION DOES MATTER!!!
-    	if(m_distance_clicks < 0){
-    		leftSpeed = leftSpeed - Robot.chassis.headingCorrection(startHeading);
-        	rightSpeed = rightSpeed + Robot.chassis.headingCorrection(startHeading);
-    	}
-    	else{
+    
     	leftSpeed = leftSpeed + Robot.chassis.headingCorrection(startHeading);
     	rightSpeed = rightSpeed - Robot.chassis.headingCorrection(startHeading);
-    	}
+    	
     	
     	Robot.chassis.setSpeed(leftSpeed, rightSpeed);
     }

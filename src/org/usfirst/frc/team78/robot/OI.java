@@ -1,6 +1,7 @@
 package org.usfirst.frc.team78.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,6 +23,7 @@ import org.usfirst.frc.team78.robot.commands.LowGoal;
 import org.usfirst.frc.team78.robot.commands.ReadyShoot;
 import org.usfirst.frc.team78.robot.commands.ReadyShoot90;
 import org.usfirst.frc.team78.robot.commands.ResetSensors;
+import org.usfirst.frc.team78.robot.commands.RumbleTest;
 import org.usfirst.frc.team78.robot.commands.SeekGoal;
 import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team78.robot.commands.SetShooterRate;
@@ -31,6 +33,7 @@ import org.usfirst.frc.team78.robot.commands.StopShooter;
 import org.usfirst.frc.team78.robot.commands.TestCommand;
 import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
+import org.usfirst.frc.team78.robot.commands.VisionTest;
 
 
 
@@ -41,9 +44,9 @@ import org.usfirst.frc.team78.robot.commands.TurnAdditional;
 public class OI {
 	
 	//JOYSTICKS
-	public Joystick driverStick;
+	public static Joystick driverStick;
 	public Joystick manipulatorStick;
-	public Joystick tStick;
+	public static Joystick tStick;
 	public Joystick weekZeroMStick;
 	
 	
@@ -202,7 +205,9 @@ public class OI {
 //__________________________________________________________________________________________________________________________________________
 	
 		btn1T = new JoystickButton(tStick, 1);
-		btn1T.whenPressed(new PunchPancake());
+		btn1T.whenPressed(new RumbleTest(1));
+		btn1T.whenReleased(new RumbleTest(0));
+		//btn1T.whenPressed(new PunchPancake());
 		//btn1T.whileHeld(new Intake());
 		//btn1T.whenReleased(new AntiIntake());
 		//btn1T.whenPressed(new Turn(90));
@@ -212,10 +217,14 @@ public class OI {
 		//btn2T.whenPressed(new MoveShooter("up"));
 		
 		btn3T = new JoystickButton(tStick, 3);
-		btn3T.whenPressed(new AlternateShooter());
+		btn3T.whenPressed(new TurnAdditional(90));
+		//btn3T.whenPressed(new AlternateShooter());
 		
 		btn4T = new JoystickButton(tStick, 4);
-		btn4T.whenPressed(new MoveShooter("down"));
+		btn4T.whenPressed(new VisionTest());
+		btn4T.whenReleased(new TurnAdditional(0));
+		
+		
 		
 		/*//btn1T.whenPressed(new TestCommand());
 		
@@ -250,6 +259,7 @@ public class OI {
 		else
 			return -stick;
 	}
+	
 	
 	
 	
