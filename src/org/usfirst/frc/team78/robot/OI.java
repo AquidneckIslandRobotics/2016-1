@@ -25,7 +25,6 @@ import org.usfirst.frc.team78.robot.commands.ReadyShoot;
 import org.usfirst.frc.team78.robot.commands.ReadyShoot90;
 import org.usfirst.frc.team78.robot.commands.ResetSensors;
 import org.usfirst.frc.team78.robot.commands.RumbleTest;
-import org.usfirst.frc.team78.robot.commands.SeekGoal;
 import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team78.robot.commands.SetShooterRate;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;

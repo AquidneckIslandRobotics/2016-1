@@ -35,7 +35,7 @@ public class Vision extends Subsystem {
     	try {
     		X = Robot.table.getDouble("X");
     	} catch ( Exception e){
-    		return 0;
+    		return -1000;
     	}
     	return X;
     	}
@@ -46,7 +46,7 @@ public class Vision extends Subsystem {
     	try {
     		Y = Robot.table.getDouble("Y");
     	} catch ( Exception e){
-    		return 0;
+    		return -1000;
     	}
     	return Y;
     
