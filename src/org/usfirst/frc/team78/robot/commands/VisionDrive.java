@@ -7,12 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SeekGoal extends Command {
+public class VisionDrive extends Command {
 
-	double speed;
+	double leftSpeed;
+	double rightSpeed;
+	double startHeading;
 	
-	
-    public SeekGoal() {
+    public VisionDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
@@ -20,26 +21,30 @@ public class SeekGoal extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.didTurnStart = false;
+    	startHeading = Robot.chassis.getAngle();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	leftSpeed = Robot.chassis.visionTurn();
+    	rightSpeed = leftSpeed;
     	
-    	speed = Robot.chassis.visionTurn();
-    	Robot.chassis.setTurnSpeed(speed);
+    	leftSpeed = leftSpeed + Robot.chassis.headingCorrection(startHeading);
+    	rightSpeed = rightSpeed - Robot.chassis.headingCorrection(startHeading);
     	
+    	Robot.chassis.setSpeed(leftSpeed, rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.chassis.isAtVisionHeadingTarget() || Robot.chassis.noGoal;
+        return Robot.chassis.isAtVisionDistance();
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.chassis.stopAllDrive();
-    	Robot.chassis.noGoal = false;
+    	Robot.chassis.timerStart = false;
+    	Robot.chassis.atTarget = false;
     	Robot.chassis.timer.stop();
     	Robot.chassis.timer.reset();
     }

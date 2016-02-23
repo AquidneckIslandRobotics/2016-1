@@ -60,8 +60,10 @@ public class Chassis extends Subsystem {
 	//CONSTANTS
 	final double GYRO_P = .003;//(.017); REAL ROBOT
 	final double DISTANCE_P = 0.00035;
-	final double VISION_GOAL = -6;
-	final double VISION_P = .001;
+	final double VISIONX_GOAL = 0;
+	final double VISIONY_GOAL = 200;
+	final double VISIONX_P = .0005;
+	final double VISIONY_P = 0;
 	final double PIXELS_TO_ANGLE = .1;
 
 	
@@ -191,18 +193,40 @@ public class Chassis extends Subsystem {
     	//setTurnSpeed(speed);
     }
     
+    public double visionDistanceCorrection(){
+    	double error = (VISIONY_GOAL - Robot.vision.getVisionY());
+    	//100-500 = -400
+	
+    	return (VISIONY_P*error);
+    }
+    
+    public double visionDrive(){
+    	double speed;
+    	speed = visionDistanceCorrection();
+    	
+    	if (speed > .7){
+    		speed = .7;
+    	}
+    	if(speed < -.7){ 
+    		speed = -.7;
+    	}
+    	
+    	if (speed < .13 && speed > 0){
+    		speed = .13;
+    	}
+    	if(speed > -.13 && speed < 0){ 
+    		speed = -.13;
+    	}
+    	
+    	
+    	return speed;
+    }
+    
+    
     public double visionHeadingCorrection(){
-    	double error = (VISION_GOAL - Robot.vision.getVisionX());
+    	double error = (VISIONX_GOAL - Robot.vision.getVisionX());	
     	
-    	if (error < -180){
-    		error = error + 360;
-    	}
-    	else if (error > 360){
-    		error = error - 360;
-    	}
-    	
-    	
-    	return -((VISION_P)*error);
+    	return -((VISIONX_P)*error);
     }
     
     public double visionTurn(){
@@ -217,11 +241,11 @@ public class Chassis extends Subsystem {
     		speed = -.7;
     	}
     	
-    	if (speed < .1 && speed > 0){
-    		speed = .1;
+    	if (speed < .13 && speed > 0){
+    		speed = .13;
     	}
-    	if(speed > -.1 && speed < 0){ 
-    		speed = -.1;
+    	if(speed > -.13 && speed < 0){ 
+    		speed = -.13;
     	}
     	
     	
@@ -240,7 +264,6 @@ public class Chassis extends Subsystem {
 //LOGIC METHODS
     
     public boolean isAtTurnTarget(double target){
-    	double correctTarget = (target % 360);
     	atTarget = false;
     	
     	double error = target - getAngle();
@@ -308,15 +331,14 @@ public class Chassis extends Subsystem {
     }// end isAtDistanceTarget
     
 
-    public boolean isAtVisionTarget(){
+    public boolean isAtVisionDistance(){
+    	double current = Robot.vision.getVisionY();
     	
-    	double current = Robot.vision.getVisionX();
-    	
-    	if (current == 0){
+    	if (current == -1000){
     		noGoal = true;
     	}
     	
-    	if ((current < (VISION_GOAL + 15)) && (current > (VISION_GOAL - 15))){
+    	if ((current < (VISIONY_GOAL + 15)) && (current > (VISIONY_GOAL - 15))){
     		if(timerStart == false){
    				timerStart = true;
    				timer.start();
@@ -333,7 +355,41 @@ public class Chassis extends Subsystem {
    			}
    		}
     	
-   		if(timer.get() >.25){
+   		if(timer.get() >.15){
+   			atTarget = true;
+    	}
+    	
+    	return atTarget;
+    	
+    }// end isAtDistanceTarget
+    
+    
+    public boolean isAtVisionHeading(){
+    	
+    	double current = Robot.vision.getVisionX();
+    	
+    	if (current == -1000){
+    		noGoal = true;
+    	}
+    	
+    	if ((current < (VISIONX_GOAL + 15)) && (current > (VISIONX_GOAL - 15))){
+    		if(timerStart == false){
+   				timerStart = true;
+   				timer.start();
+   			}
+    		
+   		}
+   	
+   		else{
+   		
+   			if(timerStart == true){
+    			timer.stop();
+    			timer.reset();
+    			timerStart = false;
+   			}
+   		}
+    	
+   		if(timer.get() >.15){
    			atTarget = true;
     	}
     	

@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class VisionTest extends Command {
+public class VisionTurn extends Command {
 
-	double angleCorrection;
 	double speed;
 	
-    public VisionTest() {
+    public VisionTurn() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
@@ -20,23 +19,28 @@ public class VisionTest extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	angleCorrection = Robot.chassis.getGyroVisionTarget();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	speed = Robot.chassis.turnAngleAdditional(angleCorrection);
+    	speed = Robot.chassis.visionTurn();
     	Robot.chassis.setTurnSpeed(speed);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.chassis.isAtTurnTarget(angleCorrection);
+        return Robot.chassis.isAtVisionHeading();
+        
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.chassis.stopAllDrive();
+    	Robot.chassis.timerStart = false;
+    	Robot.chassis.atTarget = false;
+    	Robot.chassis.timer.stop();
+    	Robot.chassis.timer.reset();
     }
 
     // Called when another command which requires one or more of the same

@@ -15,6 +15,7 @@ import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team78.robot.commands.HeadingCorrection;
 import org.usfirst.frc.team78.robot.commands.Intake;
 import org.usfirst.frc.team78.robot.commands.MoveIntake;
+import org.usfirst.frc.team78.robot.commands.VisionTurn;
 import org.usfirst.frc.team78.robot.commands.PortCoooolis;
 import org.usfirst.frc.team78.robot.commands.PunchPancake;
 import org.usfirst.frc.team78.robot.commands.AlternateShooter;
@@ -33,7 +34,7 @@ import org.usfirst.frc.team78.robot.commands.StopShooter;
 import org.usfirst.frc.team78.robot.commands.TestCommand;
 import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
-import org.usfirst.frc.team78.robot.commands.VisionTest;
+import org.usfirst.frc.team78.robot.commands.VisionSnapshot;
 
 
 
@@ -221,7 +222,7 @@ public class OI {
 		//btn3T.whenPressed(new AlternateShooter());
 		
 		btn4T = new JoystickButton(tStick, 4);
-		btn4T.whenPressed(new VisionTest());
+		btn4T.whenPressed(new VisionTurn());
 		btn4T.whenReleased(new TurnAdditional(0));
 		
 		
