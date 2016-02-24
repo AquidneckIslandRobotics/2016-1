@@ -127,7 +127,7 @@ public class Chassis extends Subsystem {
  //AUTO METHODS  
     
     public double driveStraightDistance(double distance){
-    	double distanceError = (distance - ((getLeftEnc()))); //+ getRightEnc()) / 2));
+    	double distanceError = (distance - ((getRightEnc()))); //+ getLeftEnc()) / 2));
     	double speed = distanceError*DISTANCE_P;
     	
     	/*if (distanceError > 3000){
@@ -195,7 +195,6 @@ public class Chassis extends Subsystem {
     
     public double visionDistanceCorrection(){
     	double error = (VISIONY_GOAL - Robot.vision.getVisionY());
-    	//100-500 = -400
 	
     	return (VISIONY_P*error);
     }
@@ -389,7 +388,7 @@ public class Chassis extends Subsystem {
    			}
    		}
     	
-   		if(timer.get() >.15){
+   		if(timer.get() >.25){
    			atTarget = true;
     	}
     	

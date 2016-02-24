@@ -205,7 +205,24 @@ public class OI {
 //__________________________________________________________________________________________________________________________________________
 	
 		btn1T = new JoystickButton(tStick, 1);
-		btn1T.whenPressed(new RumbleTest(1));
+		btn1T.whenPressed(new AlternateIntake());
+		
+		btn2T = new JoystickButton(tStick, 2);
+		btn2T.whenPressed(new AlternateShooter());
+		
+		btn3T = new JoystickButton(tStick, 3);
+		btn3T.whenPressed(new PunchPancake());
+		
+		btn4T = new JoystickButton(tStick, 4);
+		btn4T.whenPressed(new SetShooterSpeed(.5));
+		btn4T.whenReleased(new SetShooterSpeed(0));
+		
+		btn5T = new JoystickButton(tStick, 5);
+		btn5T.whenPressed(new SetIntakeSpeed(1));
+		btn5T.whenReleased(new SetIntakeSpeed(0));
+		
+		
+		/*btn1T.whenPressed(new RumbleTest(1));
 		btn1T.whenReleased(new RumbleTest(0));
 		//btn1T.whenPressed(new PunchPancake());
 		//btn1T.whileHeld(new Intake());
@@ -222,7 +239,7 @@ public class OI {
 		
 		btn4T = new JoystickButton(tStick, 4);
 		btn4T.whenPressed(new VisionTurn());
-		btn4T.whenReleased(new TurnAdditional(0));
+		btn4T.whenReleased(new TurnAdditional(0));*/
 		
 		
 		
