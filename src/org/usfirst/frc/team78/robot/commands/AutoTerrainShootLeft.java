@@ -1,15 +1,13 @@
 package org.usfirst.frc.team78.robot.commands;
 
-import org.usfirst.frc.team78.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class LowGoal extends CommandGroup {
+public class AutoTerrainShootLeft extends CommandGroup {
     
-    public  LowGoal() {
+    public  AutoTerrainShootLeft() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -27,11 +25,17 @@ public class LowGoal extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	if(Robot.intake.intakePnState == true){
-    		addSequential(new MoveIntake("up"));
-        	addSequential(new DoNothing(1));
-    	}
+    	addSequential(new MoveIntake("up"));
+    	addSequential(new DriveStraightDistance(11));
+    	/*addSequential(new Turn(25));
+    	addSequential(new VisionTurnAuto());
+    	addSequential(new MoveIntake("down"));
+    	addSequential(new DoNothing(.5));
+    	addSequential(new MoveShooter("up"));
+    	addSequential(new SetShooterSpeed(1));
+    	addSequential(new DoNothing(.75));
+    	addSequential(new PunchPancake());
+    	addSequential(new SetShooterSpeed(0));*/
     	
-    	addSequential(new SetShooterSpeed(0.35));
     }
 }

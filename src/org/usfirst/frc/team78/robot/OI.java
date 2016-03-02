@@ -8,32 +8,30 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team78.robot.commands.AlternateIntake;
 import org.usfirst.frc.team78.robot.commands.AntiIntake;
-import org.usfirst.frc.team78.robot.commands.AntiReadyShoot;
 import org.usfirst.frc.team78.robot.commands.DriveStraightDistance;
 import org.usfirst.frc.team78.robot.commands.DriveTime;
 import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team78.robot.commands.HeadingCorrection;
 import org.usfirst.frc.team78.robot.commands.Intake;
 import org.usfirst.frc.team78.robot.commands.MoveIntake;
-import org.usfirst.frc.team78.robot.commands.VisionTurn;
+import org.usfirst.frc.team78.robot.commands.MovePancake;
+import org.usfirst.frc.team78.robot.commands.VisionTurnAuto;
 import org.usfirst.frc.team78.robot.commands.PortCoooolis;
 import org.usfirst.frc.team78.robot.commands.PunchPancake;
 import org.usfirst.frc.team78.robot.commands.AlternateShooter;
 import org.usfirst.frc.team78.robot.commands.MoveShooter;
-import org.usfirst.frc.team78.robot.commands.LowGoal;
 import org.usfirst.frc.team78.robot.commands.ReadyShoot;
-import org.usfirst.frc.team78.robot.commands.ReadyShoot90;
 import org.usfirst.frc.team78.robot.commands.ResetSensors;
 import org.usfirst.frc.team78.robot.commands.RumbleTest;
 import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team78.robot.commands.SetShooterRate;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;
 import org.usfirst.frc.team78.robot.commands.StUCK;
-import org.usfirst.frc.team78.robot.commands.StopShooter;
 import org.usfirst.frc.team78.robot.commands.TestCommand;
 import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
 import org.usfirst.frc.team78.robot.commands.VisionSnapshot;
+import org.usfirst.frc.team78.robot.commands.VisionTurnDriver;
 
 
 
@@ -45,7 +43,7 @@ public class OI {
 	
 	//JOYSTICKS
 	public static Joystick driverStick;
-	public Joystick manipulatorStick;
+	public static Joystick manipulatorStick;
 	public static Joystick tStick;
 	public Joystick weekZeroMStick;
 	
@@ -104,17 +102,28 @@ public class OI {
 	
 	public OI(){
 		driverStick = new Joystick(0);
-		manipulatorStick = new Joystick(3);
+		manipulatorStick = new Joystick(1);
 		tStick = new Joystick(2);
-		weekZeroMStick = new Joystick(1);
+		weekZeroMStick = new Joystick(3);
+		
+		
+		
+		
+		
+		
 		
 		btn6 = new JoystickButton(driverStick, 6);
 		btn6.whileHeld(new PortCoooolis());
 		
+		btn5 = new JoystickButton(driverStick, 5);
+		btn5.whenPressed(new VisionTurnDriver());
+		btn5.whenReleased(new RumbleTest(0));
+		
+		
 //__________________________________________________________________________________________________________________________________
 //WEEK ZERO WEIRD TEMPORARY BUTTONS
 		
-		btn1W = new JoystickButton(weekZeroMStick, 1);
+		/*btn1W = new JoystickButton(weekZeroMStick, 1);
 		btn1W.whenPressed(new Intake());
 		btn1W.whenReleased(new SetShooterSpeed(0));
 		
@@ -141,7 +150,7 @@ public class OI {
 		
 		btn8W = new JoystickButton(weekZeroMStick, 8);
 		btn8W.whenPressed(new LowGoal());
-		btn8W.whenReleased(new SetShooterSpeed(0));
+		btn8W.whenReleased(new SetShooterSpeed(0));*/
 		
 		
 		//btn6W = new JoystickButton(weekZeroMStick, 6);
@@ -157,37 +166,45 @@ public class OI {
 		
 //__________________________________________________________________________________________________________________________________________
 		
-		btn1M = new JoystickButton(manipulatorStick, 1);
-		//btn1M.whileHeld(command);
-		btn1M.whenPressed(new Intake());
-		btn1M.whenReleased(new AntiIntake());
+		//*****************************************
+		//NEED TO FIGURE OUT BUTTON NUMBERS ON XBOX STICK
+		//*****************************************
 		
-		btn3M = new JoystickButton(manipulatorStick, 3);
-		btn3M.whenPressed(new PunchPancake());
-		//btn3M.whenReleased(new AlternatePancake());
+		btn1M = new JoystickButton(manipulatorStick, 5);
+		btn1M.whenPressed(new MoveIntake("down"));
+		btn1M.whenReleased(new MoveIntake("up"));
+		
+		btn3M = new JoystickButton(manipulatorStick, 6);
+		btn3M.whenPressed(new MoveShooter("up"));
+		btn3M.whenReleased(new MoveShooter("down"));
 		
 		btn4M = new JoystickButton(manipulatorStick, 4); 
-		btn4M.whenPressed(new ReadyShoot());
-		btn4M.whenReleased(new AntiReadyShoot());
+		btn4M.whenPressed(new SetShooterSpeed(1));
+		btn4M.whenReleased(new SetShooterSpeed(0));
 		
 		btn2M = new JoystickButton(manipulatorStick, 2); //spin up shooters 50%
-		btn2M.whenPressed(new ReadyShoot90());
-		btn2M.whenReleased(new AntiReadyShoot());
-		
+		btn2M.whenPressed(new MovePancake("out"));
+		btn2M.whenReleased(new MovePancake("in"));
 				
-		btn7M = new JoystickButton(manipulatorStick, 7);
-		btn7M.whileHeld(new StUCK());
-		//btn2M.whenReleased(new SetIntakeSpeed(0));
+		btn7M = new JoystickButton(manipulatorStick, 1);
+		btn7M.whenPressed(new SetShooterSpeed(.9));
+		btn7M.whenReleased(new SetShooterSpeed(0));
+		
+		btn3M = new JoystickButton(manipulatorStick, 3);
+		btn3M.whenPressed(new Intake());
+		btn3M.whenReleased(new AntiIntake());
+	
+		
+	
+		if(isTriggerPushed()){
+			new SetShooterSpeed(.5);
+		}
+		else{
+			new SetShooterSpeed(0);
+		}
 		
 		
-		
-			//btn3M.whenPressed(new Turn(90));
-				//btn3M.whenPressed(new DriveStraightDistance(10));
-		/*btn4M = new JoystickButton(manipulatorStick, 4); //spin up shooter 85%
-		btn4M.whileHeld(new SetShooterSpeed(1));
-		btn4M.whenReleased(new StopShooter());*/
-		
-		btn5M = new JoystickButton(manipulatorStick, 5);
+		/*btn5M = new JoystickButton(manipulatorStick, 5);
 		btn5M.whenPressed(new AlternateIntake());
 		
 		btn6M = new JoystickButton(manipulatorStick, 6);
@@ -199,60 +216,18 @@ public class OI {
 		//btn8M.whenReleased(new SetShooterSpeed(0));
 		
 		//btn9M = new JoystickButton(manipulatorStick, 9);
-		//btn9M.whenPressed(new ResetSensors());
+		//btn9M.whenPressed(new ResetSensors());*/
 		
 		
 //__________________________________________________________________________________________________________________________________________
 	
-		btn1T = new JoystickButton(tStick, 1);
-		btn1T.whenPressed(new AlternateIntake());
-		
-		btn2T = new JoystickButton(tStick, 2);
-		btn2T.whenPressed(new AlternateShooter());
-		
-		btn3T = new JoystickButton(tStick, 3);
-		btn3T.whenPressed(new PunchPancake());
-		
-		btn4T = new JoystickButton(tStick, 4);
-		btn4T.whenPressed(new SetShooterSpeed(.5));
-		btn4T.whenReleased(new SetShooterSpeed(0));
-		
-		btn5T = new JoystickButton(tStick, 5);
-		btn5T.whenPressed(new SetIntakeSpeed(1));
-		btn5T.whenReleased(new SetIntakeSpeed(0));
-		
-		
-		/*btn1T.whenPressed(new RumbleTest(1));
-		btn1T.whenReleased(new RumbleTest(0));
-		//btn1T.whenPressed(new PunchPancake());
-		//btn1T.whileHeld(new Intake());
-		//btn1T.whenReleased(new AntiIntake());
-		//btn1T.whenPressed(new Turn(90));
-		
-		btn2T = new JoystickButton(tStick, 2);
-		btn2T.whenPressed(new AlternateIntake());
-		//btn2T.whenPressed(new MoveShooter("up"));
-		
-		btn3T = new JoystickButton(tStick, 3);
-		btn3T.whenPressed(new TurnAdditional(90));
-		//btn3T.whenPressed(new AlternateShooter());
-		
-		btn4T = new JoystickButton(tStick, 4);
-		btn4T.whenPressed(new VisionTurn());
-		btn4T.whenReleased(new TurnAdditional(0));*/
-		
-		
-		
-		/*//btn1T.whenPressed(new TestCommand());
-		
 		/*btn1T = new JoystickButton(tStick, 1);
-		btn1T.whenPressed(new MoveIntake("down"));
+		btn1T.whenPressed(new AlternateIntake());*/
 		
-		btn2T = new JoystickButton(tStick, 1);
-		btn2T.whenPressed(new MoveIntake("up"));
+		btn2T = new JoystickButton(tStick, 2);
+		btn2T.whenPressed(new VisionTurnAuto());
 		
-		btn3T = new JoystickButton(tStick, 2);
-		btn2T.whenPressed(new AlternateIntake());*/
+		
 		
 		
 		
@@ -277,34 +252,36 @@ public class OI {
 			return -stick;
 	}
 	
+	public double getManipulatorStick() {//TODO figure out which axis is actually it
+		double stick = manipulatorStick.getRawAxis(1);
+		if (Math.abs(stick) < STICK_DEADZONE){
+			return 0;
+		}
+		else
+			return -stick;
+	}
 	
+	public boolean isStickPushed(){
+		boolean state;
+		if(getManipulatorStick() > STICK_DEADZONE || getManipulatorStick() < STICK_DEADZONE){
+			state = true;
+		}
+		else{
+			state = false;
+		}
+		return state;
+	}
 	
+	public boolean isTriggerPushed(){
+		boolean state;
+		if(manipulatorStick.getRawAxis(3) > STICK_DEADZONE || manipulatorStick.getRawAxis(3) < STICK_DEADZONE){
+			state = true;
+		}
+		else{
+			state = false;
+		}
+		return state;
+	}
 	
-    //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    // Button button = new JoystickButton(stick, buttonNumber);
-    
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
-    
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
-    
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
-    
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
 }
 

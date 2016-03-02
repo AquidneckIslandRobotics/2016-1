@@ -1,15 +1,13 @@
 package org.usfirst.frc.team78.robot.commands;
 
-import org.usfirst.frc.team78.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class ReadyShoot90 extends CommandGroup {
+public class AutoSpyBox extends CommandGroup {
     
-    public  ReadyShoot90() {
+    public  AutoSpyBox() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -27,16 +25,17 @@ public class ReadyShoot90 extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	/*if(Robot.intake.intakePnState == false){
-    		addSequential(new MoveIntake("down"));
-        	addSequential(new DoNothing(1));
-    	}
-    	
+    	addSequential(new MoveIntake("down"));
+    	addSequential(new DoNothing(.5));
     	addSequential(new MoveShooter("up"));
-    	addSequential(new DoNothing(.5));*/
-    	addParallel(new SetShooterSpeed(-.75));
-    	addSequential(new DoNothing(0.25));
+    	addSequential(new SetShooterSpeed(1));
+    	addSequential(new DoNothing(.75));
+    	addSequential(new PunchPancake());
+    	addSequential(new DoNothing(.75));
+    	addSequential(new SetShooterSpeed(0));
+    	addSequential(new MoveShooter("down"));
+    	addSequential(new MoveIntake("down"));
     	
-    	addSequential(new SetShooterSpeed(.9));
+    	
     }
 }

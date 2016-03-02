@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class VisionTurn extends Command {
+public class VisionTurnAuto extends Command {
 
 	double speed;
 	
-    public VisionTurn() {
+    public VisionTurnAuto() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);

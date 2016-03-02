@@ -55,14 +55,15 @@ public class Chassis extends Subsystem {
 	public Boolean timerStart = false;
 	public boolean atTarget = false;
 	public boolean noGoal;
+	Boolean onObstacle = false;
 	
 	
 	//CONSTANTS
-	final double GYRO_P = .003;//(.017); REAL ROBOT
+	final double GYRO_P = (.017);//.003; test bot
 	final double DISTANCE_P = 0.00035;
 	final double VISIONX_GOAL = 0;
 	final double VISIONY_GOAL = 200;
-	final double VISIONX_P = .0005;
+	final double VISIONX_P = .0028;
 	final double VISIONY_P = 0;
 	final double PIXELS_TO_ANGLE = .1;
 
@@ -102,7 +103,7 @@ public class Chassis extends Subsystem {
     		setSpeed(left, right);
     	}
     	else{
-    	setSpeed(left*.78, right*.78);
+    		setSpeed(left*.78, right*.78);
     	}
     }
     
@@ -240,7 +241,7 @@ public class Chassis extends Subsystem {
     		speed = -.7;
     	}
     	
-    	if (speed < .13 && speed > 0){
+    	if (speed < .13 && speed > 0){//TODO NEED TO BE TUNED FOR REAL ROBOT
     		speed = .13;
     	}
     	if(speed > -.13 && speed < 0){ 
@@ -250,6 +251,8 @@ public class Chassis extends Subsystem {
     	
     	return speed;
     }
+    
+
     
     public double getGyroVisionTarget(){
     	double pixels = Robot.vision.getVisionX();

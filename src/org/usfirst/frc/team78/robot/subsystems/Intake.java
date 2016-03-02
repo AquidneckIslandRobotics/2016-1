@@ -1,5 +1,6 @@
 package org.usfirst.frc.team78.robot.subsystems;
 
+import org.usfirst.frc.team78.robot.Robot;
 import org.usfirst.frc.team78.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -27,6 +28,7 @@ public class Intake extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	//setDefaultCommand(new Intake());
     }
     
     public void setIntakeSpeed(double speed){

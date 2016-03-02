@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
+import org.usfirst.frc.team78.robot.commands.AutoSpyBox;
+import org.usfirst.frc.team78.robot.commands.AutoTerrainShootLeft;
 import org.usfirst.frc.team78.robot.commands.DoNothing;
 import org.usfirst.frc.team78.robot.commands.StupidSimpleAuto;
 import org.usfirst.frc.team78.robot.commands.WeekZeroAuto;
@@ -58,6 +60,8 @@ public class Robot extends IterativeRobot {
         	chooser.addObject("Week Zero", new WeekZeroAuto());
         	chooser.addObject("Week Zero Low Bar", new WeekZeroLowBar());
         	chooser.addObject("Stupid Simple Auto", new StupidSimpleAuto());
+        	chooser.addObject("Rough Terrain Left", new AutoTerrainShootLeft());
+        	chooser.addObject("Spy Box Untested", new AutoSpyBox());
         SmartDashboard.putData("Auto mode", chooser);
     	
         CameraServer server;
@@ -165,6 +169,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putBoolean("Pancake", Robot.shooter.pancakePnState);
     	SmartDashboard.putBoolean("timer", Robot.chassis.timerStart);
     	SmartDashboard.putNumber("Vision Gyro", Robot.chassis.testAngle);
+    	SmartDashboard.putBoolean("Is at Vision Turn", Robot.chassis.isAtVisionHeading());
 
     
         	

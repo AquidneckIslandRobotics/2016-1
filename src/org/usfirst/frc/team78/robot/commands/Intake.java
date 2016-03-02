@@ -2,34 +2,46 @@ package org.usfirst.frc.team78.robot.commands;
 
 import org.usfirst.frc.team78.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Intake extends CommandGroup {
-    
-    public  Intake() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
+public class Intake extends Command {
 
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
+    public Intake() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.intake);
+    	requires(Robot.shooter);
+    }
 
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    // Called just before this Command runs the first time
+    protected void initialize() {
     	
-    	addSequential(new MoveIntake("down"));
-    	addParallel(new SetIntakeSpeed(.5));
-    	addSequential(new SetShooterSpeed(-0.35));
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	double speed = Robot.oi.getManipulatorStick();
+    	Robot.intake.setIntakeSpeed(speed*.5);
+    	Robot.shooter.setShooterSpeed(speed*.35);
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;//!Robot.oi.isStickPushed();
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    	Robot.intake.setIntakeSpeed(0);
+    	Robot.shooter.setShooterSpeed(0);
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    	end();
     }
 }
