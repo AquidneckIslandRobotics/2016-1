@@ -48,11 +48,20 @@ public class RobotMap {
 	final static public int LEFT_SHOOTER_ENC_B = 7;
 	
 	//BUTTONS
-	final static public int SHOOTER_PN = 3;
-	final static public int INTAKE_PN = 4;
-	final static public int PANCAKE_PN = 6;
-	final static public int INTAKE_MTR = 7;
-	final static public int SHOOTER_MTR = 8;
+	final static public int SHOOTER_PN = 6;
+	final static public int INTAKE_PN = 5;
+	final static public int PANCAKE_PN = 2;
+	final static public int SHOOTER_MID_BTN = 1;
+	final static public int SHOOTER_HIGH_BTN = 4;
+	
+	// FACTORS
+	final static public double INTAKE_SPEED = 0.5;
+	final static public double SHOOTER_INTAKE_SPEED = 0.2;
+	
+	// CONSTANTS
+	final static public double SHOOTER_LOW = 0.5;
+	final static public double SHOOTER_MID = 0.9;
+	final static public double SHOOTER_HIGH = 1.0;
 	
 	
     // For example to map the left and right motors, you could define the

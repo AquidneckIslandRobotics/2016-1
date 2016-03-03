@@ -1,6 +1,7 @@
 package org.usfirst.frc.team78.robot.subsystems;
 
 import org.usfirst.frc.team78.robot.RobotMap;
+import org.usfirst.frc.team78.robot.commands.DefaultShooter;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -46,7 +47,7 @@ public class Shooter extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	new SetShooterSpeed(0);
+    	setDefaultCommand(new DefaultShooter());
     }
     
 //____________________________________________________________________________________________________________________________

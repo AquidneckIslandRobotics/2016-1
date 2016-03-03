@@ -59,15 +59,11 @@ public class OI {
 	public Button btn8;
 		
 	//MANIPULATOR BUTTONS
-	public Button btn1M;
-	public Button btn2M;
-	public Button btn3M;
-	public Button btn4M;
-	public Button btn5M;
-	public Button btn6M;
-	public Button btn7M;
-	public Button btn8M;
-	public Button btn9M;
+	public Button manShooterMid;
+	public Button manPnPancake;
+	public Button manShooterHigh;
+	public Button manPnIntake;
+	public Button manPnShooter;
 	
 	//TEST STICK
 	public Button btn1T;
@@ -111,7 +107,7 @@ public class OI {
 		
 		
 		
-		
+		// DRIVER BUTTONS
 		btn6 = new JoystickButton(driverStick, 6);
 		btn6.whileHeld(new PortCoooolis());
 		
@@ -170,39 +166,27 @@ public class OI {
 		//NEED TO FIGURE OUT BUTTON NUMBERS ON XBOX STICK
 		//*****************************************
 		
-		btn1M = new JoystickButton(manipulatorStick, 5);
-		btn1M.whenPressed(new MoveIntake("down"));
-		btn1M.whenReleased(new MoveIntake("up"));
+		// MANIPULATOR BUTTONS
+		manPnIntake = new JoystickButton(manipulatorStick, RobotMap.INTAKE_PN);
+		manPnIntake.whenPressed(new MoveIntake("down"));
+		manPnIntake.whenReleased(new MoveIntake("up"));
 		
-		btn3M = new JoystickButton(manipulatorStick, 6);
-		btn3M.whenPressed(new MoveShooter("up"));
-		btn3M.whenReleased(new MoveShooter("down"));
+		manPnShooter = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_PN);
+		manPnShooter.whenPressed(new MoveShooter("up"));
+		manPnShooter.whenReleased(new MoveShooter("down"));
 		
-		btn4M = new JoystickButton(manipulatorStick, 4); 
-		btn4M.whenPressed(new SetShooterSpeed(1));
-		btn4M.whenReleased(new SetShooterSpeed(0));
+		manShooterHigh = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_HIGH_BTN); 
+		manShooterHigh.whenPressed(new SetShooterSpeed(1));
+		manShooterHigh.whenReleased(new SetShooterSpeed(0));
 		
-		btn2M = new JoystickButton(manipulatorStick, 2); //spin up shooters 50%
-		btn2M.whenPressed(new MovePancake("out"));
-		btn2M.whenReleased(new MovePancake("in"));
+		manPnPancake = new JoystickButton(manipulatorStick, RobotMap.PANCAKE_PN);
+		manPnPancake.whenPressed(new MovePancake("out"));
+		manPnPancake.whenReleased(new MovePancake("in"));
 				
-		btn7M = new JoystickButton(manipulatorStick, 1);
-		btn7M.whenPressed(new SetShooterSpeed(.9));
-		btn7M.whenReleased(new SetShooterSpeed(0));
-		
-		btn3M = new JoystickButton(manipulatorStick, 3);
-		btn3M.whenPressed(new Intake());
-		btn3M.whenReleased(new AntiIntake());
-	
-		
-	
-		if(isTriggerPushed()){
-			new SetShooterSpeed(.5);
-		}
-		else{
-			new SetShooterSpeed(0);
-		}
-		
+		manShooterMid = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_MID_BTN);
+		manShooterMid.whenPressed(new SetShooterSpeed(.9));
+		manShooterMid.whenReleased(new SetShooterSpeed(0));
+				
 		
 		/*btn5M = new JoystickButton(manipulatorStick, 5);
 		btn5M.whenPressed(new AlternateIntake());
@@ -252,13 +236,10 @@ public class OI {
 			return -stick;
 	}
 	
-	public double getManipulatorStick() {//TODO figure out which axis is actually it
-		double stick = manipulatorStick.getRawAxis(1);
-		if (Math.abs(stick) < STICK_DEADZONE){
-			return 0;
-		}
-		else
-			return -stick;
+	public double getManipulatorStick() {
+		double stick = manipulatorStick.getRawAxis(2);
+		if (Math.abs(stick) < STICK_DEADZONE) return 0;
+		else return -stick;
 	}
 	
 	public boolean isStickPushed(){
@@ -274,13 +255,8 @@ public class OI {
 	
 	public boolean isTriggerPushed(){
 		boolean state;
-		if(manipulatorStick.getRawAxis(3) > STICK_DEADZONE || manipulatorStick.getRawAxis(3) < STICK_DEADZONE){
-			state = true;
-		}
-		else{
-			state = false;
-		}
-		return state;
+		if(Math.abs(manipulatorStick.getRawAxis(3)) > STICK_DEADZONE) return true;
+		else return false;
 	}
 	
 }

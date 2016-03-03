@@ -1,49 +1,43 @@
 package org.usfirst.frc.team78.robot.commands;
 
 import org.usfirst.frc.team78.robot.Robot;
+import org.usfirst.frc.team78.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class MoveIntake extends Command {
+public class DefaultIntake extends Command {
 
-	String m_direction;
-	
-    public MoveIntake(String direction) {
+    public DefaultIntake() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.intake); //TODO may have to remove this or move the pneumatics and motors into different subsystems
-    	m_direction = direction;
+    	requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-    	if(m_direction == "down"){
-    		Robot.intake.intakeDown();
-    	}
-    	else if(m_direction == "up"){
-    		Robot.intake.intakeUp();
-    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.intake.setIntakeSpeed(Robot.oi.getManipulatorStick() * RobotMap.INTAKE_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.intake.setIntakeSpeed(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
