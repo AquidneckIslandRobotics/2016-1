@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team78.robot.commands.AlternateIntake;
 import org.usfirst.frc.team78.robot.commands.AntiIntake;
+import org.usfirst.frc.team78.robot.commands.DefaultIntake;
 import org.usfirst.frc.team78.robot.commands.DriveStraightDistance;
 import org.usfirst.frc.team78.robot.commands.DriveTime;
 import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
@@ -64,6 +65,7 @@ public class OI {
 	public Button manShooterHigh;
 	public Button manPnIntake;
 	public Button manPnShooter;
+	public Button manIntake;
 	
 	//TEST STICK
 	public Button btn1T;
@@ -170,6 +172,10 @@ public class OI {
 		manPnIntake = new JoystickButton(manipulatorStick, RobotMap.INTAKE_PN);
 		manPnIntake.whenPressed(new MoveIntake("down"));
 		manPnIntake.whenReleased(new MoveIntake("up"));
+		
+		manIntake = new JoystickButton(manipulatorStick, 3);
+		manIntake.whileHeld(new Intake());
+		manIntake.whenReleased(new AntiIntake());
 		
 		manPnShooter = new JoystickButton(manipulatorStick, RobotMap.SHOOTER_PN);
 		manPnShooter.whenPressed(new MoveShooter("up"));

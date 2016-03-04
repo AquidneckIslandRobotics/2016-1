@@ -3,6 +3,7 @@ package org.usfirst.frc.team78.robot.subsystems;
 import org.usfirst.frc.team78.robot.Robot;
 import org.usfirst.frc.team78.robot.RobotMap;
 import org.usfirst.frc.team78.robot.commands.DefaultIntake;
+import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -30,7 +31,7 @@ public class Intake extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     	//setDefaultCommand(new Intake());
-    	setDefaultCommand(new DefaultIntake());
+    	setDefaultCommand(new SetIntakeSpeed(0)); // TODO tim added may need to take out
     }
     
     public void setIntakeSpeed(double speed){

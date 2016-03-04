@@ -23,9 +23,9 @@ public class Intake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double speed = Robot.oi.getManipulatorStick();
-    	Robot.intake.setIntakeSpeed(speed*.5);
-    	Robot.shooter.setShooterSpeed(speed*.35);
+    	//double speed = Robot.oi.getManipulatorStick();
+    	Robot.intake.setIntakeSpeed(-0.5);
+    	Robot.shooter.setShooterSpeed(-0.35);
     }
 
     // Make this return true when this Command no longer needs to run execute()
