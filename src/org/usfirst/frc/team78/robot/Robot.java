@@ -64,10 +64,10 @@ public class Robot extends IterativeRobot {
         	chooser.addObject("Spy Box Untested", new AutoSpyBox());
         SmartDashboard.putData("Auto mode", chooser);
     	
-        CameraServer server;
-        server = CameraServer.getInstance();
-    	server.setQuality(50);
-    	server.startAutomaticCapture("cam0");
+//        CameraServer server;
+//        server = CameraServer.getInstance();
+//    	server.setQuality(50);
+//    	server.startAutomaticCapture("cam0");
 
     	table = NetworkTable.getTable("magicland");
     	

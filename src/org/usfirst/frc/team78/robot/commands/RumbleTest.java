@@ -2,7 +2,7 @@ package org.usfirst.frc.team78.robot.commands;
 
 import org.usfirst.frc.team78.robot.OI;
 
-import edu.wpi.first.wpilibj.Joystick.RumbleType;
+//import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -20,8 +20,8 @@ public class RumbleTest extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	OI.tStick.setRumble(RumbleType.kLeftRumble, m_i);
-    	OI.tStick.setRumble(RumbleType.kRightRumble, m_i);
+//    	OI.tStick.setRumble(RumbleType.kLeftRumble, m_i);
+//    	OI.tStick.setRumble(RumbleType.kRightRumble, m_i);
     }
 
     // Called repeatedly when this Command is scheduled to run

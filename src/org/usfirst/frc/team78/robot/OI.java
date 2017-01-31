@@ -1,7 +1,7 @@
 package org.usfirst.frc.team78.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.RumbleType;
+//import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,7 +23,7 @@ import org.usfirst.frc.team78.robot.commands.AlternateShooter;
 import org.usfirst.frc.team78.robot.commands.MoveShooter;
 import org.usfirst.frc.team78.robot.commands.ReadyShoot;
 import org.usfirst.frc.team78.robot.commands.ResetSensors;
-import org.usfirst.frc.team78.robot.commands.RumbleTest;
+//import org.usfirst.frc.team78.robot.commands.RumbleTest;
 import org.usfirst.frc.team78.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team78.robot.commands.SetShooterRate;
 import org.usfirst.frc.team78.robot.commands.SetShooterSpeed;
@@ -115,7 +115,7 @@ public class OI {
 		
 		btn5 = new JoystickButton(driverStick, 5);
 		btn5.whenPressed(new VisionTurnDriver());
-		btn5.whenReleased(new RumbleTest(0));
+//		btn5.whenReleased(new RumbleTest(0));
 		
 		
 //__________________________________________________________________________________________________________________________________

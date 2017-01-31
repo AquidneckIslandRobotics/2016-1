@@ -3,7 +3,7 @@ package org.usfirst.frc.team78.robot.commands;
 import org.usfirst.frc.team78.robot.OI;
 import org.usfirst.frc.team78.robot.Robot;
 
-import edu.wpi.first.wpilibj.Joystick.RumbleType;
+//import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -43,8 +43,8 @@ public class VisionTurnDriver extends Command {
     	Robot.chassis.atTarget = false;
     	Robot.chassis.timer.stop();
     	Robot.chassis.timer.reset();
-    	OI.manipulatorStick.setRumble(RumbleType.kLeftRumble, 1);
-    	OI.manipulatorStick.setRumble(RumbleType.kRightRumble, 1);
+//    	OI.manipulatorStick.setRumble(RumbleType.kLeftRumble, 1);
+//    	OI.manipulatorStick.setRumble(RumbleType.kRightRumble, 1);
     }
 
     // Called when another command which requires one or more of the same
