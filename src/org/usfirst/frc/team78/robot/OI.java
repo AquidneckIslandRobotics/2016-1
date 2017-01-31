@@ -33,6 +33,7 @@ import org.usfirst.frc.team78.robot.commands.Turn;
 import org.usfirst.frc.team78.robot.commands.TurnAdditional;
 import org.usfirst.frc.team78.robot.commands.VisionSnapshot;
 import org.usfirst.frc.team78.robot.commands.VisionTurnDriver;
+import org.usfirst.frc.team78.robot.commands.climber2017;
 
 
 
@@ -116,6 +117,9 @@ public class OI {
 		btn5 = new JoystickButton(driverStick, 5);
 		btn5.whenPressed(new VisionTurnDriver());
 //		btn5.whenReleased(new RumbleTest(0));
+		
+		btn1 = new JoystickButton(driverStick, 1);
+		btn1.whileHeld(new climber2017(0.2)); // sets climber on the robot to 0.2
 		
 		
 //__________________________________________________________________________________________________________________________________
