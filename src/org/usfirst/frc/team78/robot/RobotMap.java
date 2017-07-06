@@ -16,4 +16,4 @@ public class RobotMap {
 	
 	final static public int LIMIT = 0;
 
-}
+} 
