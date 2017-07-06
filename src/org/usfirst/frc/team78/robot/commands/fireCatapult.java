@@ -7,26 +7,32 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ResetSensors extends Command {
+public class fireCatapult extends Command {
 
-    public ResetSensors() {
+    public fireCatapult() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.catapult);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.resetSensorData();
-    	Robot.shooter.resetSensorData();
+    	Robot.catapult.setChooChoo(100);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	try {
+			wait(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return !(Robot.catapult.getLimit());
     }
 
     // Called once after isFinished returns true
