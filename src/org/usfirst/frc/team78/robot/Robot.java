@@ -12,16 +12,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
-import org.usfirst.frc.team78.robot.commands.AutoSpyBox;
-import org.usfirst.frc.team78.robot.commands.AutoTerrainShootLeft;
-import org.usfirst.frc.team78.robot.commands.DoNothing;
-import org.usfirst.frc.team78.robot.commands.StupidSimpleAuto;
-import org.usfirst.frc.team78.robot.commands.WeekZeroAuto;
-import org.usfirst.frc.team78.robot.commands.WeekZeroLowBar;
+import org.usfirst.frc.team78.robot.subsystems.Catapult;
 import org.usfirst.frc.team78.robot.subsystems.Chassis;
-import org.usfirst.frc.team78.robot.subsystems.Intake;
-import org.usfirst.frc.team78.robot.subsystems.Shooter;
-import org.usfirst.frc.team78.robot.subsystems.Vision;
+
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,9 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static final Chassis chassis = new Chassis();
-	public static final Vision vision = new Vision();
-	public static final Shooter shooter = new Shooter();
-	public static final Intake intake = new Intake();
+	public static final Catapult catapult = new Catapult(); 
 	public static OI oi;
 
     Command autonomousCommand;
@@ -54,30 +45,6 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {//read about ahrs reset, fix slow mode
 		oi = new OI();
-        chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new DoNothing(3));
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        	chooser.addObject("Week Zero", new WeekZeroAuto());
-        	chooser.addObject("Week Zero Low Bar", new WeekZeroLowBar());
-        	chooser.addObject("Stupid Simple Auto", new StupidSimpleAuto());
-        	chooser.addObject("Rough Terrain Left", new AutoTerrainShootLeft());
-        	chooser.addObject("Spy Box Untested", new AutoSpyBox());
-        SmartDashboard.putData("Auto mode", chooser);
-    	
-//        CameraServer server;
-//        server = CameraServer.getInstance();
-//    	server.setQuality(50);
-//    	server.startAutomaticCapture("cam0");
-
-    	table = NetworkTable.getTable("magicland");
-    	
-    	Compressor c = new Compressor(0);
-    	c.setClosedLoopControl(true);
-    	intake.intakeUp();
-    	shooter.pancakeIn();
-    	shooter.shooterDown();
-    	
-    	chassis.resetSensorData();
   
     }
 	
@@ -126,7 +93,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	SmartDashboard.putNumber("GyroA", Robot.chassis.getAngle());
+    	
     	
         Scheduler.getInstance().run();
     }
@@ -144,34 +111,33 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
     	
-    	//SENSOR DATA
-    	SmartDashboard.putNumber("Left Enc", Robot.chassis.getLeftEnc());
-    	SmartDashboard.putNumber("Right Enc", Robot.chassis.getRightEnc());
-    	SmartDashboard.putNumber("Right Stick", Robot.oi.getDriverRightStick());
-    	SmartDashboard.putNumber("Left Stick", Robot.oi.getDriverLeftStick());
-    	SmartDashboard.putNumber("Shooter Rate", Robot.shooter.getRightShooterRate());
-    	SmartDashboard.putNumber("Get Angle", Robot.chassis.getAngle());
-    	SmartDashboard.putNumber("Get Pitch", Robot.chassis.getPitch());
-    	SmartDashboard.putNumber("Get Roll", Robot.chassis.getRoll());
-    	
-    	//VISION
-    	SmartDashboard.putNumber("Jetson X", Robot.vision.getVisionX());
-    	SmartDashboard.putNumber("Jetson Y", Robot.vision.getVisionY());
-    	
-    	//PROGRAM TESTS
-    	SmartDashboard.putNumber("Shooter Speed", Robot.shooter.shooterSpeed);
-    	SmartDashboard.putBoolean("Timer", Robot.chassis.timerStart);
-    	SmartDashboard.putNumber("Rate Error", Robot.shooter.rateError);
-    	SmartDashboard.putNumber("I Component", Robot.shooter.iComponent);
-    	SmartDashboard.putNumber("P Component", Robot.shooter.pComponent);
-    	SmartDashboard.putBoolean("Intake", Robot.intake.intakePnState);
-    	SmartDashboard.putBoolean("Shooter", Robot.shooter.shooterPnState);
-    	SmartDashboard.putBoolean("Pancake", Robot.shooter.pancakePnState);
-    	SmartDashboard.putBoolean("timer", Robot.chassis.timerStart);
-    	SmartDashboard.putNumber("Vision Gyro", Robot.chassis.testAngle);
-    	SmartDashboard.putBoolean("Is at Vision Turn", Robot.chassis.isAtVisionHeading());
-
-    
+//    	//SENSOR DATA
+//    	SmartDashboard.putNumber("Left Enc", Robot.chassis.getLeftEnc());
+//    	SmartDashboard.putNumber("Right Enc", Robot.chassis.getRightEnc());
+//    	SmartDashboard.putNumber("Right Stick", Robot.oi.getDriverRightStick());
+//    	SmartDashboard.putNumber("Left Stick", Robot.oi.getDriverLeftStick());
+//    	SmartDashboard.putNumber("Get Angle", Robot.chassis.getAngle());
+//    	SmartDashboard.putNumber("Get Pitch", Robot.chassis.getPitch());
+//    	SmartDashboard.putNumber("Get Roll", Robot.chassis.getRoll());
+//    	
+//    	//VISION
+//    	SmartDashboard.putNumber("Jetson X", Robot.vision.getVisionX());
+//    	SmartDashboard.putNumber("Jetson Y", Robot.vision.getVisionY());
+//    	
+//    	//PROGRAM TESTS
+//    	SmartDashboard.putNumber("Shooter Speed", Robot.shooter.shooterSpeed);
+//    	SmartDashboard.putBoolean("Timer", Robot.chassis.timerStart);
+//    	SmartDashboard.putNumber("Rate Error", Robot.shooter.rateError);
+//    	SmartDashboard.putNumber("I Component", Robot.shooter.iComponent);
+//    	SmartDashboard.putNumber("P Component", Robot.shooter.pComponent);
+//    	SmartDashboard.putBoolean("Intake", Robot.intake.intakePnState);
+//    	SmartDashboard.putBoolean("Shooter", Robot.shooter.shooterPnState);
+//    	SmartDashboard.putBoolean("Pancake", Robot.shooter.pancakePnState);
+//    	SmartDashboard.putBoolean("timer", Robot.chassis.timerStart);
+//    	SmartDashboard.putNumber("Vision Gyro", Robot.chassis.testAngle);
+//    	SmartDashboard.putBoolean("Is at Vision Turn", Robot.chassis.isAtVisionHeading());
+//
+//    
         	
         Scheduler.getInstance().run();
     }
