@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 import org.usfirst.frc.team78.robot.Robot;
 import org.usfirst.frc.team78.robot.RobotMap;
+import org.usfirst.frc.team78.robot.commands.resetCatapult;
 
 import com.ctre.CANTalon;
 /**
@@ -20,6 +21,7 @@ public class Catapult extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new resetCatapult());
     }
     
     public void setChooChoo(int speed){
@@ -27,7 +29,7 @@ public class Catapult extends Subsystem {
     }
     
     public boolean getLimit(){
-    	return limit.get();
+    	return !limit.get();
     }
 }
 

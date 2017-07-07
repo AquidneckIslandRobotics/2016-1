@@ -11,7 +11,7 @@ public class RobotMap {
 	//MOTORS(PWN)
 	final static public int LEFT_DRIVE_1 = 2;
 	final static public int LEFT_DRIVE_2 = 3;
-	final static public int RIGHT_DRIVE_1 = 0;
+	final static public int RIGHT_DRIVE_1 = 0; 
 	final static public int RIGHT_DRIVE_2 = 1;
 	
 	final static public int LIMIT = 0;

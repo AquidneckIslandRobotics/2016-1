@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
+import org.usfirst.frc.team78.robot.commands.resetCatapult;
 import org.usfirst.frc.team78.robot.subsystems.Catapult;
 import org.usfirst.frc.team78.robot.subsystems.Chassis;
 
@@ -112,32 +113,9 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	
 //    	//SENSOR DATA
-//    	SmartDashboard.putNumber("Left Enc", Robot.chassis.getLeftEnc());
-//    	SmartDashboard.putNumber("Right Enc", Robot.chassis.getRightEnc());
-//    	SmartDashboard.putNumber("Right Stick", Robot.oi.getDriverRightStick());
-//    	SmartDashboard.putNumber("Left Stick", Robot.oi.getDriverLeftStick());
-//    	SmartDashboard.putNumber("Get Angle", Robot.chassis.getAngle());
-//    	SmartDashboard.putNumber("Get Pitch", Robot.chassis.getPitch());
-//    	SmartDashboard.putNumber("Get Roll", Robot.chassis.getRoll());
-//    	
-//    	//VISION
-//    	SmartDashboard.putNumber("Jetson X", Robot.vision.getVisionX());
-//    	SmartDashboard.putNumber("Jetson Y", Robot.vision.getVisionY());
-//    	
-//    	//PROGRAM TESTS
-//    	SmartDashboard.putNumber("Shooter Speed", Robot.shooter.shooterSpeed);
-//    	SmartDashboard.putBoolean("Timer", Robot.chassis.timerStart);
-//    	SmartDashboard.putNumber("Rate Error", Robot.shooter.rateError);
-//    	SmartDashboard.putNumber("I Component", Robot.shooter.iComponent);
-//    	SmartDashboard.putNumber("P Component", Robot.shooter.pComponent);
-//    	SmartDashboard.putBoolean("Intake", Robot.intake.intakePnState);
-//    	SmartDashboard.putBoolean("Shooter", Robot.shooter.shooterPnState);
-//    	SmartDashboard.putBoolean("Pancake", Robot.shooter.pancakePnState);
-//    	SmartDashboard.putBoolean("timer", Robot.chassis.timerStart);
-//    	SmartDashboard.putNumber("Vision Gyro", Robot.chassis.testAngle);
-//    	SmartDashboard.putBoolean("Is at Vision Turn", Robot.chassis.isAtVisionHeading());
-//
-//    
+    	SmartDashboard.putBoolean("limit", Robot.catapult.getLimit());
+    	
+//    	new resetCatapult();
         	
         Scheduler.getInstance().run();
     }

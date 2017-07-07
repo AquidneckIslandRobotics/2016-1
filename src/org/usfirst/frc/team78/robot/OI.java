@@ -47,12 +47,11 @@ public class OI {
 		
 	// DRIVER BUTTONS
 		
-	btn5 = new JoystickButton(driverStick, 5);	
-	btn5.whenPressed(new fireCatapult());
-	btn5.whenReleased(new resetCatapult());
-	
 	btn6 = new JoystickButton(driverStick, 6);
-	btn6.whenPressed(new readySetShoot());
+	btn6.whenPressed(new fireCatapult());
+		
+//	btn5 = new JoystickButton(driverStick, 5);
+//	btn5.whenPressed(new readySetShoot());
 				
 
 		
