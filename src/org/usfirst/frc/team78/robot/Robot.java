@@ -59,6 +59,7 @@ public class Robot extends IterativeRobot {
     }
 	
 	public void disabledPeriodic() {
+		SmartDashboard.putBoolean("limit", Robot.catapult.getLimit());
 		Scheduler.getInstance().run();
 	}
 
