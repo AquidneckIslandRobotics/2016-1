@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import org.usfirst.frc.team78.robot.subsystems.Catapult;
 import org.usfirst.frc.team78.robot.subsystems.Chassis;
-
+import org.usfirst.frc.team78.robot.subsystems.Hopper;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,6 +30,7 @@ public class Robot extends IterativeRobot {
 
 	public static final Chassis chassis = new Chassis();
 	public static final Catapult catapult = new Catapult(); 
+	public static final Hopper hopper = new Hopper();
 	public static OI oi;
 
     Command autonomousCommand;
@@ -104,6 +105,9 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        hopper.closeGate("upper");
+        hopper.closeGate("lower");
+        
     }
 
     /**

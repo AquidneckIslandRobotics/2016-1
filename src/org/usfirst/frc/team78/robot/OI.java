@@ -11,6 +11,7 @@ import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team78.robot.commands.fireCatapult;
 import org.usfirst.frc.team78.robot.commands.readySetShoot;
 import org.usfirst.frc.team78.robot.commands.resetCatapult;
+import org.usfirst.frc.team78.robot.commands.upperGate;
 
 
 
@@ -53,10 +54,10 @@ public class OI {
 	
 	btn6 = new JoystickButton(driverStick, 6);
 	btn6.whenPressed(new readySetShoot());
-				
-
-		
-		
+			
+	btn1 = new JoystickButton(driverStick, 1);
+	btn1.whenPressed(new upperGate());
+	
 	}
 	
 	///DRIVER STICK
