@@ -1,30 +1,19 @@
 package org.usfirst.frc.team78.robot.commands;
 
-import org.usfirst.frc.team78.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class lowerGate extends Command {
+public class doNothing extends Command {
 
-    public lowerGate() {
+    public doNothing() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.hopper);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize(){
-    	Robot.hopper.openGate("lower");
-    	try {
-			wait(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	Robot.hopper.closeGate("lower");
+    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,7 +22,7 @@ public class lowerGate extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

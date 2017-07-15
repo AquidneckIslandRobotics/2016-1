@@ -16,7 +16,7 @@ public class RobotMap {
 	
 	final static public int LIMIT = 0;
 	
-	final static public int UPPERGATE = 1;
-	final static public int LOWERGATE = 0;
+	final static public int UPPERGATE = 9;
+	final static public int LOWERGATE = 8;
 
 } 

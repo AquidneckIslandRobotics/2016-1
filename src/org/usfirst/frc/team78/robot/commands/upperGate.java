@@ -19,7 +19,7 @@ public class upperGate extends Command {
     protected void initialize(){
     	Robot.hopper.openGate("upper");
     	try {
-			wait(2000);
+			wait(300);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

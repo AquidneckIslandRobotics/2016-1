@@ -8,9 +8,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 import org.usfirst.frc.team78.robot.commands.DriveWithJoysticks;
+import org.usfirst.frc.team78.robot.commands.dispense;
 import org.usfirst.frc.team78.robot.commands.fireCatapult;
+import org.usfirst.frc.team78.robot.commands.lowerGate;
 import org.usfirst.frc.team78.robot.commands.readySetShoot;
 import org.usfirst.frc.team78.robot.commands.resetCatapult;
+import org.usfirst.frc.team78.robot.commands.test;
 import org.usfirst.frc.team78.robot.commands.upperGate;
 
 
@@ -58,6 +61,12 @@ public class OI {
 	btn1 = new JoystickButton(driverStick, 1);
 	btn1.whenPressed(new upperGate());
 	
+	btn3 = new JoystickButton(driverStick, 3);
+	btn3.whenPressed(new lowerGate());
+//	btn2.whenPressed(new test());
+	
+	btn4 = new JoystickButton(driverStick, 4);
+	btn4.whenPressed(new dispense());
 	}
 	
 	///DRIVER STICK

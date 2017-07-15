@@ -2,6 +2,7 @@ package org.usfirst.frc.team78.robot.subsystems;
 
 import org.usfirst.frc.team78.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,18 +19,21 @@ public class Hopper extends Subsystem {
 	
 	public void openGate(String gate){
 		if(gate == "upper"){
-			upperGate.setPosition(0.5);
+			upperGate.setAngle(90);
 		}else if(gate == "lower"){
-			lowerGate.setPosition(0.5);
+			lowerGate.setAngle(90);
 		}
 	}
 	
 	public void closeGate(String gate){
 		if(gate == "upper"){
-			upperGate.setPosition(0);
+			upperGate.setAngle(30);
 		}else if(gate == "lower"){
-			lowerGate.setPosition(1);
+			lowerGate.setAngle(30);
 		}
+	}
+	public void test(){
+		upperGate.setAngle(180);
 	}
 
     public void initDefaultCommand() {
